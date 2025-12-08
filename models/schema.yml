@@ -49,3 +49,36 @@ sources:
         description: the cost of preparing the parcel in the distribution centre/warehouse
       - name: ship_cost
         description: shipping cost paid by Greenweez to the carrier/logistics provider
+    - name: adwords
+      identifier: raw_gz_adwords
+    - name: bing
+      identifier: raw_gz_bing
+    - name: criteo
+      identifier: raw_gz_criteo
+    - name: facebook
+      identifier: raw_gz_facebook
+    - name : int_campaigns
+      identifier: all_campaigns
+      columns:
+      - name: paid_source
+      tests:
+       - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+            - campaign_key
+            - date_date
+    - name : int_campaigns_day
+      identifier: all campaigns by day
+      columns:
+        - name: date_date
+          tests:
+            - unique
+            - not_null
+    - name : finance_campaigns_day
+      identifier: global kpis
+      columns:
+        - name: ads_margin
+          tests:
+          - not_null
+        - name : avg_basket
+          tests:
+            - not_null
